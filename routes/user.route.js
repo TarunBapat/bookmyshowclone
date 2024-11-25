@@ -2,8 +2,8 @@ import express from "express";
 import {
   //   loginUser,
   createUser,
-  //   updateUser,
-  //   deleteUser,
+  updateUser,
+  deleteUser,
   //   getUserdDetails,
   //   getUser,
 } from "../controllers/user.controller.js";
@@ -20,11 +20,11 @@ router.post("/", createUser);
 
 // update user
 
-// router.put("/:userid", updateUser);
+router.put("/:userid", updateUser);
 
 // delete user
 
-// router.delete("/:userid", deleteUser);
+router.delete("/:userid", deleteUser);
 
 // get user by id
 

@@ -4,7 +4,6 @@ import User from "../models/userSchema.model.js";
 const createUser = async (req, res) => {
   try {
     const { name, email, password, isAdmin } = req.body;
-    console.log("userDatauserDatauserData", name, email, password, isAdmin);
     const user = await User.create({
       name,
       email,
@@ -17,24 +16,29 @@ const createUser = async (req, res) => {
     res.status(500).send({ message: "error while creating user" });
   }
 };
-// async function updateUser() {
-//   try {
-//     const userData = req.body;
-//     const user = User.createUser(userData);
-//     res.status(200).send(user);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// }
-// async function deleteUser() {
-//   try {
-//     const userData = req.body;
-//     const user = User.createUser(userData);
-//     res.status(200).send(user);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// }
+
+const updateUser = async (req, res) => {
+  try {
+    const { name, email, password, isAdmin } = req.body;
+    console.log({ name, email, password, isAdmin });
+    const user = await User.updateOne(
+      { name: "usergfdfhg" },
+      { $set: { name, email, password, isAdmin } }
+    );
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send({ message: "error while updating user" });
+  }
+};
+async function deleteUser(req, res) {
+  try {
+    // const userData = req.body;
+    const user = await User.deleteOne({ name: "dsddsdsd" });
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send({ message: "error while deleting user" });
+  }
+}
 // async function getUserdDetails() {
 //   try {
 //     const userData = req.body;
@@ -57,8 +61,8 @@ const createUser = async (req, res) => {
 export {
   //   loginUser,
   createUser,
-  //   updateUser,
-  //   deleteUser,
+  updateUser,
+  deleteUser,
   //   getUserdDetails,
   //   getUser,
 };
