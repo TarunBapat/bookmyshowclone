@@ -48,15 +48,14 @@ async function deleteUser(req, res) {
 //     res.status(500).send(err);
 //   }
 // }
-// async function getUser() {
-//   try {
-//     const userData = req.body;
-//     const user = User.createUser(userData);
-//     res.status(200).send(user);
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// }
+async function getAllUsers(req, res) {
+  try {
+    const users = await User.find();
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(500).send({ message: "error while grtting all user" });
+  }
+}
 
 export {
   //   loginUser,
@@ -64,5 +63,5 @@ export {
   updateUser,
   deleteUser,
   //   getUserdDetails,
-  //   getUser,
+  getAllUsers,
 };
