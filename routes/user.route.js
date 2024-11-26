@@ -30,8 +30,4 @@ router.delete("/:userid", deleteUser);
 
 router.get("/", getAllUsers);
 
-// get user
-
-// router.get("/:userid", getUser);
-
 export default router;

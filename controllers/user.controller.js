@@ -15,7 +15,6 @@ async function loginUser(req, res) {
     if (!isPassMatch) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
-    console.log("token", isPassMatch);
     // Generate JWT
     const token = jwt.sign(
       { id: user._id, email: user.email },
