@@ -44,3 +44,9 @@ seats booked
 ticket price
 movie
 time
+{
+"name":"tarun",
+"email":"tarun121@gmail.com",
+"password":"12321214",
+"isAdmin": false
+}
