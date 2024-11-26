@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  //   loginUser,
+  loginUser,
   createUser,
   updateUser,
   deleteUser,
@@ -12,7 +12,7 @@ const router = express.Router();
 
 // login user
 
-// router.post("/login", loginUser);
+router.post("/login", loginUser);
 
 // create user
 

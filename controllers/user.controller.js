@@ -1,6 +1,35 @@
 import User from "../models/userSchema.model.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-// async function loginUser(req, res) {}
+async function loginUser(req, res) {
+  const { email, password } = req.body;
+  console.log(email, password);
+  try {
+    const user = await User.findOne({ email: email });
+    console.log("user", user);
+    if (!user) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+    const isPassMatch = await bcrypt.compare(password, user.password);
+    if (!isPassMatch) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+    console.log("token", isPassMatch);
+    // Generate JWT
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+    console.log("token", token);
+    res.json({ message: "Login successful", token });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+}
 const createUser = async (req, res) => {
   try {
     const { name, email, password, isAdmin } = req.body;
@@ -58,7 +87,7 @@ async function getAllUsers(req, res) {
 }
 
 export {
-  //   loginUser,
+  loginUser,
   createUser,
   updateUser,
   deleteUser,
