@@ -23,7 +23,14 @@ async function loginUser(req, res) {
         expiresIn: "1h",
       }
     );
+    const options = {
+      withCredentials: true,
+      httpOnly: true,
+      secure: true,
+    };
+
     console.log("token", token);
+    res.cookie("accessToken", token, options);
     res.json({ message: "Login successful", token });
   } catch (error) {
     res.status(500).json({ error: "Server error" });

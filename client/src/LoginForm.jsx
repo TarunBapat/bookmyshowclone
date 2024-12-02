@@ -1,4 +1,5 @@
 import { useState } from "react";
+import login from "./api/api";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -7,18 +8,10 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const token = await fetch("http://localhost:5001/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    console.log("token:", token);
-    console.log("Password:", password);
+    const response = await login({ email, password });
+
+    const data = await response.json();
+    document.cookie = `authToken=${data.token}`;
   };
 
   return (
