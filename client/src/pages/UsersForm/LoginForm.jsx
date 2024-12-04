@@ -1,5 +1,5 @@
 import { useState } from "react";
-import login from "./api/api";
+import Api from "../../api/api.js";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -8,9 +8,8 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const response = await login({ email, password });
-
-    const data = await response.json();
+    const response = await Api.login({ email, password });
+    const data = response.data;
     document.cookie = `authToken=${data.token}`;
   };
 
