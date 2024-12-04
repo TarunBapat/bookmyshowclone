@@ -32,6 +32,6 @@ router.get("/", getAllUsers);
 
 //forget-password
 
-router.post("/", forgetUserPassword);
+router.post("/forget-password", forgetUserPassword);
 
 export default router;

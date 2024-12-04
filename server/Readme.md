@@ -61,3 +61,6 @@ time
 "password":"admin1234",
 "isAdmin": true
 }
+
+https://ethereal.email/create
+https://myaccount.google.com/apppasswords
