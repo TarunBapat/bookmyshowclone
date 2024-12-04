@@ -106,7 +106,7 @@ async function forgetUserPassword(req, res) {
     const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    const resetLink = `http://localhost:3000/reset-password/${token}`;
+    const resetLink = `http://localhost:5173/reset-password/${token}`;
 
     // Send email
     const transporter = nodemailer.createTransport({
@@ -157,10 +157,40 @@ async function forgetUserPassword(req, res) {
           return res.status(500).json({ message: "Failed to send email" });
         }
 
-        res.json({ message: "Password reset email sent successfully" });
+        res.json({
+          message: "Password reset email sent successfully",
+          resetLink: resetLink,
+        });
       }
     );
   } catch (error) {}
+}
+
+async function resetPassword(req, res) {
+  const { token, newPassword } = req.body;
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.find({ email: decodedToken.email });
+    console.log("user", user);
+    if (user.length == 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(newPassword, salt);
+    user[0].password = hash;
+
+    await User.updateOne(
+      { email: user[0].email },
+      {
+        $set: { ...user[0], password: hash },
+      }
+    );
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    return res.status(403).send({ message: "invalid token" });
+  }
 }
 
 export {
@@ -169,5 +199,6 @@ export {
   updateUser,
   deleteUser,
   forgetUserPassword,
+  resetPassword,
   getAllUsers,
 };

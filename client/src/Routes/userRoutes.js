@@ -2,6 +2,7 @@
 import LoginForm from "../pages/UsersForm/LoginForm";
 import Register from "../pages/UsersForm/Register";
 import ForgetPassword from "../pages/UsersForm/ForgetPassword";
+import ResetPassword from "../pages/UsersForm/ResetPassword";
 
 const userRoutes = [
   { path: "/login", component: LoginForm, exact: true },
@@ -10,6 +11,10 @@ const userRoutes = [
     path: "/forget-password",
     component: ForgetPassword,
     exact: true,
+  },
+  {
+    path: "/reset-password/:token",
+    component: ResetPassword,
   },
 ];
 
