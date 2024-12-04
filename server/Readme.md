@@ -58,7 +58,7 @@ time
 {
 "name":"tarun admin",
 "email":"tarunadmin12123dgfd1121@gmail.com",
-"password":"admin1234",
+"password":"admin12345",
 "isAdmin": true
 }
 

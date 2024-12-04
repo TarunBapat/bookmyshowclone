@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Api from "../../api/api.js";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -63,7 +65,7 @@ const LoginForm = () => {
         >
           Submit
         </button>
-        <p>forget password?</p>
+        <p onClick={() => navigate("/forget-password")}>forget password?</p>
       </form>
     </div>
   );
