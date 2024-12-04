@@ -92,11 +92,21 @@ async function getAllUsers(req, res) {
   }
 }
 
+async function forgetUserPassword(req, res) {
+  const { email } = req.body;
+  try {
+    const userExists = await User.find({ email: email });
+    if (!userExists) {
+      return res.status(404).send("user not found");
+    }
+  } catch (error) {}
+}
+
 export {
   loginUser,
   createUser,
   updateUser,
   deleteUser,
-  //   getUserdDetails,
+  forgetUserPassword,
   getAllUsers,
 };
