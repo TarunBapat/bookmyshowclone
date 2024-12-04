@@ -13,6 +13,8 @@ const apiClient = () => {
       client.post("/api/v1/users/login", JSON.stringify(payload)),
     Register: (payload) =>
       client.post("/api/v1/users/create", JSON.stringify(payload)),
+    forgetPassword: (payload) =>
+      client.post("/api/v1/users/forget-password", JSON.stringify(payload)),
   };
 };
 

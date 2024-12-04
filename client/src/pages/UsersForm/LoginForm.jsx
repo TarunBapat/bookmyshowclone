@@ -4,7 +4,6 @@ import Api from "../../api/api.js";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -64,6 +63,7 @@ const LoginForm = () => {
         >
           Submit
         </button>
+        <p>forget password?</p>
       </form>
     </div>
   );

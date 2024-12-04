@@ -1,15 +1,24 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import LoginForm from "./pages/UsersForm/LoginForm";
-import Register from "./pages/UsersForm/Register";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import allRoutes from "./Routes";
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <LoginForm />
-      <Register />
+      <Router>
+        <Routes>
+          {allRoutes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={<route.component />}
+            />
+          ))}
+        </Routes>
+      </Router>
     </>
   );
 }
