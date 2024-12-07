@@ -11,7 +11,7 @@ import isTheatreOwner from "../middleware/isTheatreOwner.middleware.js";
 const router = express.Router();
 
 router.post("/create", Auth, isTheatreOwner, createShow);
-router.put("/:id", Auth, isTheatreOwner, updateShow);
+// router.put("/:id", Auth, isTheatreOwner, updateShow);
 router.delete("/:id", Auth, isTheatreOwner, deleteShow);
 router.put("/:id", getShowById);
 

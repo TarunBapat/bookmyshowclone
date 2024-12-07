@@ -1,7 +1,7 @@
+import MovieRoutes from "./moviesRoutes";
+import TheatreRoutes from "./theatreRoutes";
 import userRoutes from "./userRoutes";
-// import protectedRoutes from "./protectedRoutes";
-// import adminRoutes from "./adminRoutes";
 
-const allRoutes = [...userRoutes];
+const allRoutes = [...userRoutes, ...TheatreRoutes, ...MovieRoutes];
 
 export default allRoutes;

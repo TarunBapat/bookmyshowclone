@@ -10,7 +10,7 @@ const isTheatreOwner = async (req, res, next) => {
   } catch (error) {
     res.status(403).send({
       success: false,
-      message: e.message,
+      message: error.message,
     });
   }
 };

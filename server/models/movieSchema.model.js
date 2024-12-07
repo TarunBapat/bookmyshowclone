@@ -18,12 +18,12 @@ const movieSchema = new Schema(
     },
     genre: {
       type: [String],
-      enum: ["Thriller", "Action", "Fantasy"],
+      // enum: ["Action", "Thriller", "Drama"],
       required: true,
     },
     language: {
       type: [String],
-      enum: ["English", "Hindi"],
+      // enum: [],
       required: true,
     },
     releaseData: {

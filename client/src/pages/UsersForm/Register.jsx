@@ -74,7 +74,12 @@ const Register = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            style={{
+              width: "100%",
+              padding: "8px",
+              marginTop: "5px",
+              border: "1px solid",
+            }}
           />
           {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
         </div>
@@ -85,7 +90,12 @@ const Register = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            style={{
+              width: "100%",
+              padding: "8px",
+              marginTop: "5px",
+              border: "1px solid",
+            }}
           />
           {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
         </div>
@@ -96,7 +106,12 @@ const Register = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            style={{
+              width: "100%",
+              padding: "8px",
+              marginTop: "5px",
+              border: "1px solid",
+            }}
           />
           {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         </div>
@@ -107,7 +122,12 @@ const Register = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            style={{
+              width: "100%",
+              padding: "8px",
+              marginTop: "5px",
+              border: "1px solid",
+            }}
           />
           {errors.confirmPassword && (
             <p style={{ color: "red" }}>{errors.confirmPassword}</p>

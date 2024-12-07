@@ -50,4 +50,19 @@ const getTheatreById = async (req, res) => {
   }
 };
 
-export { updateTheatre, deleteTheatre, createTheatre, getTheatreById };
+const getAllTheatre = async (req, res) => {
+  try {
+    const theatre = await Theatre.find();
+    return res.status(200).send({ theatre });
+  } catch (error) {
+    return res.status(401).send({ message: "error while fetching theatre" });
+  }
+};
+
+export {
+  updateTheatre,
+  deleteTheatre,
+  createTheatre,
+  getTheatreById,
+  getAllTheatre,
+};

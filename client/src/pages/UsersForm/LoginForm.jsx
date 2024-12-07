@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Api from "../../api/api.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -9,9 +10,16 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const response = await Api.login({ email, password });
-    const data = response.data;
-    document.cookie = `authToken=${data.token}`;
+    try {
+      const response = await Api.login({ email, password });
+      const data = response.data;
+      document.cookie = `authToken=${data.token}`;
+      toast.success(data.message);
+      navigate("/theatres");
+    } catch (error) {
+      toast.error("login failed");
+      console.log(error);
+    }
   };
 
   return (
@@ -30,7 +38,12 @@ const LoginForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: "0.5rem", fontSize: "1rem" }}
+            style={{
+              width: "100%",
+              padding: "0.5rem",
+              fontSize: "1rem",
+              border: "1px solid",
+            }}
             required
           />
         </div>
@@ -46,7 +59,12 @@ const LoginForm = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: "0.5rem", fontSize: "1rem" }}
+            style={{
+              width: "100%",
+              padding: "0.5rem",
+              fontSize: "1rem",
+              border: "1px solid",
+            }}
             required
           />
         </div>
@@ -66,6 +84,7 @@ const LoginForm = () => {
           Submit
         </button>
         <p onClick={() => navigate("/forget-password")}>forget password?</p>
+        <p onClick={() => navigate("/register")}>signup</p>
       </form>
     </div>
   );
