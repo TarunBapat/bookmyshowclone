@@ -53,4 +53,24 @@ const getShowById = async (req, res) => {
   }
 };
 
-export { updateShow, deleteShow, createShow, getShowById };
+const getShowByFilter = async (req, res) => {
+  try {
+    const { movie, theatre, date } = req.query;
+    console.log("movie, theatre, date", movie, theatre, date);
+    const filter = {};
+    if (movie) {
+      filter.movie = movie;
+    }
+    if (theatre) {
+      filter.theatre = theatre;
+    }
+    if (date) {
+      filter.date = date;
+    }
+
+    const movieData = await Show.find(filter).populate(["theatre"]);
+    console.log("movieDatamovieDatamovieDatamovieData", movieData);
+    res.status(200).send({ movieData: movieData });
+  } catch (error) {}
+};
+export { updateShow, deleteShow, createShow, getShowById, getShowByFilter };

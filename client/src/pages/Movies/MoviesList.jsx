@@ -7,7 +7,6 @@ const MoviesList = () => {
   useEffect(() => {
     async function fetchAllMovies() {
       const response = await Api.allMovies();
-      console.log(response);
       setMovies(response?.data?.movie);
     }
     fetchAllMovies();

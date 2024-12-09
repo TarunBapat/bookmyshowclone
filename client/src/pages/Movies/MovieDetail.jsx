@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Api from "../../api/movieApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { movieId } = useParams();
+  const navigate = useNavigate();
   console.log("67545d30822a98ef7c435085", movieId);
   useEffect(() => {
     // Mock API Call - Replace this with your actual API endpoint
@@ -15,7 +16,6 @@ const MovieDetail = () => {
         setLoading(true);
         const response = await Api.getMovieById(movieId);
         setMovie(response?.data?.movie[0]);
-        console.log("responseresponseresponseresponse", response);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -87,6 +87,14 @@ const MovieDetail = () => {
                 </span>
               ))}
             </div>
+          </div>
+          <div className="mt-4">
+            <button
+              onClick={() => navigate(`/movies/${movieId}/theatres`)}
+              className="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300"
+            >
+              Book Now
+            </button>
           </div>
         </div>
       </div>
