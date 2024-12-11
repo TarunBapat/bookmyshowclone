@@ -13,9 +13,9 @@ const LoginForm = () => {
     try {
       const response = await Api.login({ email, password });
       const data = response.data;
-      document.cookie = `authToken=${data.token}`;
+      localStorage.setItem("authToken", data.token);
       toast.success(data.message);
-      navigate("/theatres");
+      navigate("/");
     } catch (error) {
       toast.error("login failed");
       console.log(error);
