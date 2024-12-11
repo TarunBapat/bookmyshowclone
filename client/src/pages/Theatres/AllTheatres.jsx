@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Api from "../../api/showApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const AllTheatres = () => {
   const [theatres, setTheatres] = useState([]);
@@ -15,12 +15,13 @@ const AllTheatres = () => {
       if (!acc[show?.theatre._id]) {
         acc[show?.theatre._id] = {
           ...show?.theatre,
-          shows: [{ name: show?.name, time: show?.time }],
+          shows: [{ _id: show._id, name: show?.name, time: show?.time }],
         };
       } else {
         acc[show?.theatre?._id]?.shows?.push({
           name: show?.name,
           time: show?.time,
+          _id: show?._id,
         });
       }
       return acc;
@@ -82,12 +83,17 @@ const AllTheatres = () => {
                 {/* Shows */}
                 <div className="p-5 md:w-2/3 flex flex-wrap gap-3">
                   {theatre?.shows?.map((show, index) => (
-                    <span
-                      key={index}
-                      className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full"
+                    // eslint-disable-next-line react/jsx-key
+                    <Link
+                      to={`/movies/${movieId}/theatres/${theatre._id}/shows/${show._id}`}
                     >
-                      {show.time}
-                    </span>
+                      <span
+                        key={index}
+                        className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full"
+                      >
+                        {show.time}
+                      </span>
+                    </Link>
                   ))}
                 </div>
               </div>

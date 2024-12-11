@@ -10,7 +10,7 @@ const moviesClient = () => {
   });
   return {
     getShows: (payload) => client.get(`/api/v1/show?movie=${payload}`),
-    // getMovieById: (id) => client.get(`/api/v1/movie/movies/${id}`),
+    getShowById: (id) => client.get(`/api/v1/show/shows/${id}`),
   };
 };
 
