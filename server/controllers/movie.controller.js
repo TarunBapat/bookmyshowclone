@@ -5,9 +5,9 @@ const createMovie = async (req, res) => {
   const movieData = {
     ...movie,
   };
+  console.log("movieDatamovieDatamovieData", movieData);
   try {
     const createdMovie = await Movie.create(movieData);
-    console.log("movieDatamovieDatamovieData", createdMovie);
     return res.status(200).send({
       createdMovie,
     });

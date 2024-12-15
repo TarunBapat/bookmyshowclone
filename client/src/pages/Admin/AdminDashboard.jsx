@@ -2,14 +2,39 @@ import { useEffect, useState } from "react";
 import Api from "../../api/movieApi";
 import Api1 from "../../api/theatreApi";
 import Api2 from "../../api/showApi";
+import CreateMoviePopup from "../../components/popups/CreateMoviePopup";
+import EditMoviePopup from "../../components/popups/EditMoviePopup";
+import DeleteMoviePopup from "../../components/popups/DeleteMoviePopup";
+import CreateTheatrePopup from "../../components/popups/CreateTheatrePopup";
+import EditTheatrePopup from "../../components/popups/EditTheatrePopup";
+import DeleteTheatrePopup from "../../components/popups/DeleteTheatrePopup";
 
 const AdminDashboard = () => {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
   const [theatres, setTheatres] = useState([]);
-  const SectionSplit = ["Movies", "Theatre", "Shows"];
-  const handleButtonClick = (action, section) => {
-    alert(`${action} clicked in ${section}`);
+  const SectionSplit = ["Movie", "Theatre", "Shows"];
+  const [popups, setPopups] = useState({
+    createMovie: false,
+    editMovie: false,
+    deleteMovie: false,
+    createTheatre: false,
+    editTheatre: false,
+    deleteTheatre: false,
+  });
+
+  const popupContent = {
+    createMovie: <CreateMoviePopup setPopups={setPopups} />,
+    editMovie: <EditMoviePopup setPopups={setPopups} />,
+    deleteMovie: <DeleteMoviePopup setPopups={setPopups} />,
+    createTheatre: <CreateTheatrePopup setPopups={setPopups} />,
+    editTheatre: <EditTheatrePopup setPopups={setPopups} />,
+    deleteTheatre: <DeleteTheatrePopup setPopups={setPopups} />,
+  };
+  const handlePopupClick = (key) => {
+    setPopups((prev) => {
+      return { ...prev, [key]: !popups[key] };
+    });
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +66,11 @@ const AdminDashboard = () => {
       <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
         Manage Sections
       </h1>
+      {/* popus mapping */}
+
+      {Object.keys(popups).map((popupkey) => {
+        return popups[popupkey] && popupContent[popupkey];
+      })}
 
       {/* Sections */}
       {[movies, theatres].map((section, idx) => (
@@ -52,7 +82,7 @@ const AdminDashboard = () => {
               Section {SectionSplit[idx]}
             </h2>
             <button
-              onClick={() => handleButtonClick("Create")}
+              onClick={() => handlePopupClick(`create${SectionSplit[idx]}`)}
               className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
             >
               Create
@@ -70,7 +100,7 @@ const AdminDashboard = () => {
                   <div className="flex gap-1">
                     <button
                       onClick={() =>
-                        handleButtonClick("Edit", `Section ${section}`)
+                        handlePopupClick(`edit${SectionSplit[idx]}`)
                       }
                       className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
                     >
@@ -78,7 +108,7 @@ const AdminDashboard = () => {
                     </button>
                     <button
                       onClick={() =>
-                        handleButtonClick("Delete", `Section ${section}`)
+                        handlePopupClick(`delete${SectionSplit[idx]}`)
                       }
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                     >
