@@ -59,7 +59,11 @@ const CreateMoviePopup = ({ setPopups, popups }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await Api.createMovie(formData);
+      const payload = {
+        ...formData,
+        duration: Number(formData.duration),
+      };
+      const response = await Api.createMovie(payload);
 
       console.log("response", response);
     } catch (error) {
