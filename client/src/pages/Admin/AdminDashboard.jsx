@@ -14,6 +14,7 @@ const AdminDashboard = () => {
   const [shows, setShows] = useState([]);
   const [theatres, setTheatres] = useState([]);
   const SectionSplit = ["Movie", "Theatre", "Shows"];
+  const [deleteKey, setDeleteKey] = useState("");
   const [popups, setPopups] = useState({
     createMovie: false,
     editMovie: false,
@@ -26,10 +27,14 @@ const AdminDashboard = () => {
   const popupContent = {
     createMovie: <CreateMoviePopup setPopups={setPopups} />,
     editMovie: <EditMoviePopup setPopups={setPopups} />,
-    deleteMovie: <DeleteMoviePopup setPopups={setPopups} />,
+    deleteMovie: (
+      <DeleteMoviePopup deleteKey={deleteKey} setPopups={setPopups} />
+    ),
     createTheatre: <CreateTheatrePopup setPopups={setPopups} />,
     editTheatre: <EditTheatrePopup setPopups={setPopups} />,
-    deleteTheatre: <DeleteTheatrePopup setPopups={setPopups} />,
+    deleteTheatre: (
+      <DeleteTheatrePopup deleteKey={deleteKey} setPopups={setPopups} />
+    ),
   };
   const handlePopupClick = (key) => {
     setPopups((prev) => {
@@ -59,8 +64,10 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, []);
-
+  }, [popups]);
+  const handleDelete = (id) => {
+    setDeleteKey(id);
+  };
   return (
     <div className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
@@ -107,9 +114,10 @@ const AdminDashboard = () => {
                       Edit
                     </button>
                     <button
-                      onClick={() =>
-                        handlePopupClick(`delete${SectionSplit[idx]}`)
-                      }
+                      onClick={() => {
+                        handlePopupClick(`delete${SectionSplit[idx]}`);
+                        handleDelete(movie?._id);
+                      }}
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                     >
                       Delete

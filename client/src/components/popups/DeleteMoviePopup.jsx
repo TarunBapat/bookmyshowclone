@@ -1,6 +1,15 @@
 import React from "react";
+import Api from "../../api/movieApi";
 
-const DeleteMoviePopup = () => {
+const DeleteMoviePopup = ({ deleteKey, setPopups }) => {
+  async function deleteHandler(movieId) {
+    try {
+      const response = await Api.deleteMovie(movieId);
+      console.log("deleteKey response", response);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
       <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -10,13 +19,22 @@ const DeleteMoviePopup = () => {
         </p>
         <div className="flex justify-center space-x-4">
           <button
-            onClick={() => {}}
+            onClick={() => {
+              deleteHandler(deleteKey);
+              setPopups((prev) => {
+                return { ...prev, deleteMovie: false };
+              });
+            }}
             className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none"
           >
             Delete
           </button>
           <button
-            onClick={() => {}}
+            onClick={() =>
+              setPopups((prev) => {
+                return { ...prev, deleteMovie: false };
+              })
+            }
             className="bg-gray-300 text-gray-800 py-2 px-4 rounded hover:bg-gray-400 focus:outline-none"
           >
             Cancel

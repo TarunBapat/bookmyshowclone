@@ -15,6 +15,7 @@ const moviesClient = () => {
     getMovieById: (id) => client.get(`/api/v1/movie/movies/${id}`),
     createMovie: (payload) =>
       client.post("/api/v1/movie/create", JSON.stringify(payload)),
+    deleteMovie: (id) => client.delete(`/api/v1/movie/${id}`),
   };
 };
 
